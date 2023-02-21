@@ -8,7 +8,7 @@ To learn more about The Odin Project : https://www.theodinproject.com/
 
 To learn more about the specific Full Stack JavaScript Path : https://www.theodinproject.com/paths/full-stack-javascript
 
-The goal of this project is to build a Balanced Binary Tree.
+The goal of this project is to build a Balanced Binary Search Tree.
 
 ## Skills to practice
 
