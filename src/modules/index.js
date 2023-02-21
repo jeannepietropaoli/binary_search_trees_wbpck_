@@ -1,39 +1,40 @@
-import merge from './mergeSort';
 import Tree from './Tree';
+import generateRandomArrayOfInt from './generateRandomInts';
 
-console.log(merge([1, 6, 2, 9, 10, 22, 13]));
-
-function generateRandomInt() {
-  return Math.floor(Math.random() * 100);
+function printTreeTraversal(tree) {
+  console.log(`levelorder : ${tree.levelOrderRecursive()}`);
+  console.log(`preorder : ${tree.preorder()}`);
+  console.log(`postorder : ${tree.postorder()}`);
+  console.log(`inorder : ${tree.inorder()}`);
 }
 
-function generateRandomArrayOfInt(length = 7, array = []) {
-  for (let i = 1; i <= length; i++) {
-    array.push(generateRandomInt());
-  }
-  return array;
+function printIfTreeIsBalaned(tree) {
+  console.log(`is the tree balanced ? ${tree.isBalanced()}`);
 }
 
-const tree = new Tree(generateRandomArrayOfInt(4));
-tree.prettyPrint();
-console.log(`is the tree balanced ? ${tree.isBalanced()}`);
-console.log(`levelorder : ${tree.levelOrderRecursive()}`);
-console.log(`preorder : ${tree.preorder()}`);
-console.log(`postorder : ${tree.postorder()}`);
-console.log(`inorder : ${tree.inorder()}`);
+function printInfosAboutTree(tree) {
+  tree.prettyPrint();
+  printIfTreeIsBalaned(tree);
+  printTreeTraversal(tree);
+}
+
+/* const tree = new Tree(generateRandomArrayOfInt(4));
+
+printInfosAboutTree(tree);
 
 tree.insert(145);
 tree.insert(122);
 tree.insert(246);
 tree.insert(257);
-tree.prettyPrint();
-console.log(`is the tree balanced ? ${tree.isBalanced()}`);
-console.log(tree.levelOrderRecursive());
+
+printInfosAboutTree(tree);
 
 tree.rebalance();
+
+printInfosAboutTree(tree); */
+
+const tree = new Tree([1, 3, 6, 9, 2, 4, 10, 11, 4, 5]);
+
+printInfosAboutTree(tree);
+tree.delete(10);
 tree.prettyPrint();
-console.log(`is the tree balanced ? ${tree.isBalanced()}`);
-console.log(tree.levelOrderRecursive());
-console.log(tree.preorder());
-console.log(tree.postorder());
-console.log(tree.inorder());

@@ -1,14 +1,20 @@
 import Node from './Node';
+import removeDuplicates from './removeDuplicates';
+import mergeSort from './mergeSort';
 
-function buildTree(array) {
+function buildTree(uniqueSortedArray) {
   // array must be sorted and duplicates must be removed
-  if (array.length === 0) return null;
+  if (uniqueSortedArray.length === 0) return null;
   const start = 0;
-  const end = array.length;
+  const end = uniqueSortedArray.length;
   const mid = Math.floor((end - start) / 2);
-  const left = array.slice(0, mid);
-  const right = array.slice(mid + 1, end);
-  const node = new Node(array[mid], buildTree(left), buildTree(right));
+  const leftSubarray = uniqueSortedArray.slice(0, mid);
+  const rightSubarray = uniqueSortedArray.slice(mid + 1, end);
+  const node = new Node(
+    uniqueSortedArray[mid],
+    buildTree(leftSubarray),
+    buildTree(rightSubarray)
+  );
   return node;
 }
 

@@ -4,8 +4,13 @@ import mergeSort from './mergeSort';
 import Node from './Node';
 
 class Tree {
-  constructor(array) {
-    this.root = buildTree(removeDuplicates(mergeSort(array)));
+  constructor(originalArray) {
+    this.uniqueSortedArray = removeDuplicates(mergeSort(originalArray));
+    this.root = buildTree(this.uniqueSortedArray);
+  }
+
+  isALeafNode(node) {
+    return node.right === null && node.left === null;
   }
 
   prettyPrint(node = this.root, prefix = '', isLeft = true) {
@@ -51,14 +56,13 @@ class Tree {
   }
 
   countChild(node) {
-    if (node.left === null && node.right === null) return 0;
+    if (this.isALeafNode(node)) return 0;
     if (node.left === null || node.right === null) return 1;
     return 2;
   }
 
   parentNode(child, node = this.root) {
-    if ((node.left === null && node.right === null) || child === this.root)
-      return undefined;
+    if (this.isALeafNode(node) || child === this.root) return undefined;
     if (node.left === child || node.right === child) return node;
     return node.data > child.data
       ? this.parentNode(child, node.left)
@@ -70,22 +74,34 @@ class Tree {
     return this.findTheSmallestOfTheHighest(node, start.left);
   }
 
+  manageDeletionNodeWithOneChild(node, parent) {
+    let newChild;
+    node.left === null ? (newChild = node.right) : (newChild = node.left);
+    parent.data > newChild.data
+      ? (parent.left = newChild)
+      : (parent.right = newChild);
+  }
+
+  manageDeletionNodeWithNoChild(node, parent) {
+    parent.data > node.data ? (parent.left = null) : (parent.right = null);
+  }
+
+  manageDeletionNodeWithTwoChilds(node) {
+    const replacementNode = this.findTheSmallestOfTheHighest(node);
+    const replacementData = replacementNode.data;
+    this.delete(replacementData);
+    node.data = replacementData;
+  }
+
   delete(value) {
     const node = this.find(value);
     const parent = this.parentNode(node);
     if (this.countChild(node) === 0)
-      parent.data > node.data ? (parent.left = null) : (parent.right = null);
+      this.manageDeletionNodeWithNoChild(node, parent);
     else if (this.countChild(node) === 1) {
-      let newChild;
-      node.left === null ? (newChild = node.right) : (newChild = node.left);
-      parent.data > newChild.data
-        ? (parent.left = newChild)
-        : (parent.right = newChild);
+      this.manageDeletionNodeWithOneChild(node, parent);
     } else {
-      const replacementNode = this.findTheSmallestOfTheHighest(node);
-      const replacementData = replacementNode.data;
-      this.delete(replacementData);
-      node.data = replacementData;
+      this.manageDeletionNodeWithTwoChilds(node);
     }
   }
 
@@ -157,7 +173,7 @@ class Tree {
 
   height(node = this.root) {
     if (node === null) return 0;
-    if (node.left === null && node.right === null) return 0;
+    if (this.isALeafNode(node)) return 0;
     let heightOfLeft = 0;
     let heightOfRight = 0;
     if (node.left != null) heightOfLeft = 1 + this.height(node.left);
