@@ -18,7 +18,7 @@ function printInfosAboutTree(tree) {
   printTreeTraversal(tree);
 }
 
-/* const tree = new Tree(generateRandomArrayOfInt(4));
+const tree = new Tree(generateRandomArrayOfInt(4));
 
 printInfosAboutTree(tree);
 
@@ -31,10 +31,4 @@ printInfosAboutTree(tree);
 
 tree.rebalance();
 
-printInfosAboutTree(tree); */
-
-const tree = new Tree([1, 3, 6, 9, 2, 4, 10, 11, 4, 5]);
-
 printInfosAboutTree(tree);
-tree.delete(10);
-tree.prettyPrint();

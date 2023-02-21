@@ -10,6 +10,9 @@ To learn more about the specific Full Stack JavaScript Path : https://www.theodi
 
 The goal of this project is to build a Balanced Binary Search Tree.
 
+Tree class can be found in the src/modules folder inside the 'Tree.js' file.
+Node class can be found in the same directory inside the 'Node.js' file.
+
 ## Skills to practice
 
 - Creating classes (constructor, parameters, getters, setters and methods)
