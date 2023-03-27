@@ -6,7 +6,7 @@ Project inside the Odin Project's Full Stack JavaScript course.
 
 To learn more about The Odin Project : https://www.theodinproject.com/
 
-To learn more about the specific Full Stack JavaScript Path : https://www.theodinproject.com/paths/full-stack-javascript
+To learn more about the specific project : https://www.theodinproject.com/lessons/javascript-binary-search-trees
 
 The goal of this project is to build a Balanced Binary Search Tree.
 
